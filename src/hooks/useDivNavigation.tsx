@@ -39,7 +39,7 @@ const useDivNavigation = (
     const handleClick = (event: KeyboardEvent) => {
       if (event.key === "Enter" || event.keyCode === 13) {
         if (array && array[selectedDivIndex]) {
-          navigate(`/product/${array[selectedDivIndex]._id}`);
+          navigate(`/product/${array[selectedDivIndex].slug}`);
         }
       }
     };

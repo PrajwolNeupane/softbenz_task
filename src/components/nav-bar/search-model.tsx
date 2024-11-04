@@ -45,7 +45,8 @@ function SearchModal() {
           }
         }}
       >
-        <div className="flex flex-col gap-2 absolute mx-[30vw] mt-[50px] px-5 py-3 w-[40vw] bg-[white] rounded-[5px] shadow-md">
+        <div className="flex flex-col gap-2 absolute left-[50%] translate-x-[-50%] mt-[50px] px-5 py-3 xl:w-[40vw] lg:w-[50vw] md:w-[60vw] sm:w-[80vw] w-[90vw] bg-[white] rounded-[5px] shadow-md">
+          {/*============= SEARCH BOX ===============*/}
           <div className="flex flex-row px-3 py-1 gap-2 border-[2px] items-center border-brand-600 rounded-[5px]">
             <i className="uil uil-search text-sm text-500 cursor-pointer"></i>
             <input
@@ -65,7 +66,7 @@ function SearchModal() {
               }}
             ></i>
           </div>
-          <div className="flex flex-row items-center gap-5">
+          <div className="flex-row xsm:flex hidden items-center gap-5">
             <div className="flex flex-row items-center gap-1">
               <span className="shortcut-key">
                 <i className="uil uil-arrow-up text-sm text-text-300"></i>
@@ -91,7 +92,7 @@ function SearchModal() {
             if (selectedIndex == indx) {
               return (
                 <Link
-                  to={`/product/${curr?._id}`}
+                  to={`/product/${curr?.slug}`}
                   className="group flex p-2 w-full gap-3 rounded-[5px] cursor-pointer bg-text-400"
                   key={indx}
                   onMouseEnter={() => {
@@ -100,25 +101,32 @@ function SearchModal() {
                 >
                   <img
                     src={curr?.images[0]}
-                    className="w-20 object-cover rounded-md"
+                    className="md:w-20 w-10 object-cover rounded-md"
                   />
                   <div className="flex flex-col">
                     <h2 className="text-2xs font-mb text-light-400">
                       {curr?.title}
                     </h2>
                     <h4 className="text-3xs font-mb text-light-600">
-                      {curr?.price}
+                      {curr?.brand.name}
                     </h4>
-                    <p className="text-3xs font-mb text-light-600">
-                      ${curr?.price}
-                    </p>
+                    <div className="flex gap-1 items-center">
+                      {curr?.strikePrice != curr?.price && (
+                        <p className="text-3xs font-mb text-light-600 line-through">
+                          ${curr?.strikePrice}
+                        </p>
+                      )}
+                      <p className="text-3xs font-mb text-light-600">
+                        ${curr?.price}
+                      </p>
+                    </div>
                   </div>
                 </Link>
               );
             } else {
               return (
                 <Link
-                  to={`/product/${curr?._id}`}
+                  to={`/product/${curr?.slug}`}
                   className="group flex bg-light-600 gap-3 p-2 w-full rounded-[5px] cursor-pointer hover:bg-text-400"
                   key={indx}
                   onMouseEnter={() => {
@@ -127,18 +135,25 @@ function SearchModal() {
                 >
                   <img
                     src={curr?.images[0]}
-                    className="w-20 object-cover rounded-md"
+                    className="md:w-20 w-10 object-cover rounded-md"
                   />
                   <div className="flex flex-col">
                     <h2 className="text-2xs font-mb text-text-500 group-hover:text-light-400">
                       {curr?.title}
                     </h2>
                     <h4 className="text-3xs font-mb text-text-300 group-hover:text-light-600">
-                      {curr?.price}
+                      {curr?.brand.name}
                     </h4>
-                    <p className="text-3xs font-mb text-brand-700 group-hover:text-light-600">
-                      ${curr?.price}
-                    </p>
+                    <div className="flex gap-1 items-center">
+                      {curr?.strikePrice != curr?.price && (
+                        <p className="text-3xs font-mb text-brand-700 group-hover:text-light-600 line-through">
+                          ${curr?.strikePrice}
+                        </p>
+                      )}
+                      <p className="text-3xs font-mb text-brand-700 group-hover:text-light-600">
+                        ${curr?.price}
+                      </p>
+                    </div>
                   </div>
                 </Link>
               );
