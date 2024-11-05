@@ -10,6 +10,18 @@ export interface GetProduct {
   data: SingleProduct;
 }
 
+export interface NewCartResponse {
+  title: string;
+  message: string;
+  data: NewCart;
+}
+
+export interface CartProduct {
+  product: string;
+  quantity: number;
+  variantType: string;
+}
+
 export interface Data {
   pagination: Pagination;
   docs: Product[];
@@ -107,4 +119,39 @@ export interface SizeVariant {
 export interface BreadCrum {
   title: string;
   slug: string;
+}
+
+export interface NewCart {
+  orderId: string;
+  orderStatus: string;
+  paymentMethod: string;
+  paymentStatus: string;
+  subTotal: number;
+  totalAmount: number;
+  voucherCode: string;
+  voucherAmount: number;
+  deliveryAddress: string;
+  deliveryCharge: number;
+  isDeleted: boolean;
+  _id: string;
+  items: any[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface CartItem {
+  product: { _id: string; slug: string; title: string; images: string[] };
+  variantType: string;
+  noneText: string;
+  selectedVariantName: string;
+  quantity: number;
+  price: number;
+  strikePrice: number;
+  offPercent: number;
+  minOrder: number;
+  maxOrder: number;
+  subTotal: number;
+  reviewGiven: boolean;
+  _id: string;
 }

@@ -6,7 +6,7 @@ import { setSearch } from "@features/store/reducer/search-reducer";
 interface Props {}
 
 let NavBar: FC<Props> = ({}) => {
-  //   const { cart } = useAppSelector((state) => state.Cart);
+  const { carts } = useAppSelector((state) => state.Cart);
   const dispatch = useAppDispatch();
 
   return (
@@ -46,12 +46,14 @@ let NavBar: FC<Props> = ({}) => {
             Contact
           </h4>
         </Link>
-        {/* <Link to={"/cart"} className="relative inline-block">
+        <Link to={"/cart"} className="relative inline-block">
           <i className="uil uil-shopping-cart text-text-500 text-lg hover:text-brand-500 cursor-pointer"></i>
           <div className="badge">
-            <p className="text-3xs text-background">{cart.length}</p>
+            <p className="text-3xs text-background">
+              {carts == null ? 0 : carts.length}
+            </p>
           </div>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

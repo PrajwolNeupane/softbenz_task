@@ -1,5 +1,5 @@
 import instance, { fileUploadInstance } from "../endpoints/baseUrl";
-import Cookies from "js-cookie";
+
 
 export const api = {
   get: async <T>(endpoint: string, params?: object) => {

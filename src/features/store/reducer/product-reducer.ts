@@ -10,7 +10,7 @@ const initialState: StateProps = {
 };
 
 const ProductReducer = createSlice({
-  name: "Search",
+  name: "Product",
   initialState,
   reducers: {
     setProducts: (state, action: PayloadAction<Product[]>) => {
