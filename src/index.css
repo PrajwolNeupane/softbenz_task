@@ -8,6 +8,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+body {
+  background-color: rgb(235 230 230 / 0.6);
+}
+
 @layer components {
   .shortcut-key {
     @apply font-mono font-sb text-text-500 text-3xs bg-brand-200 p-1 cursor-pointer

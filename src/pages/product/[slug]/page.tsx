@@ -31,20 +31,20 @@ const Page = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col w-[100%] min-h-[88vh] justify-start md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] sm:py-[30px] py-[15px] bg-background/50">
+      <div className="flex flex-col w-[100%] min-h-[88vh] justify-start md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] sm:py-[30px] py-[15px]">
         <SingleProductLoader />
       </div>
     );
   }
   return (
-    <div className="flex flex-col w-[100%] min-h-[88vh] justify-start md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] sm:py-[30px] py-[15px] bg-background/50">
+    <div className="flex flex-col w-[100%] min-h-[88vh] justify-start md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] sm:py-[30px] py-[15px]">
       <div className="flex flex-col bg-white w-[100%] px-[10%] py-5 gap-[10px] shadow-md rounded-[5px]">
-        <div className="flex gap-[50px]">
+        <div className="flex sm:flex-row flex-col  gap-[50px]">
           <img
             src={data?.data?.images[0]}
-            className="lg:w-[22%] md:w-[25%] sm:w-[30%] w-[40%] aspect-square object-cover"
+            className="lg:w-[22%] md:w-[25%] sm:w-[30%] w-full aspect-square object-cover"
           />
-          <div className="flex flex-col gap-2 sm:items-start items-center">
+          <div className="flex flex-col gap-2">
             <h2 className="sm:text-md text-rg font-sb text-text-500 leading-[120%]">
               {data?.data?.title}
             </h2>

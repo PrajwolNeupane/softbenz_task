@@ -16,7 +16,7 @@ let HomePage: FC<Props> = ({}) => {
       {products == null ? (
         <ProductLoader />
       ) : (
-        <div className="w-full grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2  md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] py-[30px] bg-background/50">
+        <div className="w-full grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2  md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] py-[30px]">
           {products?.map((curr: Product | null, indx: number) => (
             <Link
               to={`product/${curr?.slug}`}

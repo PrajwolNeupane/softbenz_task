@@ -15,9 +15,9 @@ function Page() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col w-[100%] justify-center md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] sm:py-[30px] py-[15px] bg-background">
+    <div className="flex flex-col w-[100%] justify-center md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] sm:py-[30px] py-[15px]">
       <h2 className="text-md font-sb text-text-500 mt-3">Shopping Cart</h2>
-      <div className="flex sm:flex-row flex-col-reverse w-[100%] gap-5 min-h-[465px] items-start">
+      <div className="flex sm:flex-row flex-col-reverse w-full gap-5 items-start">
         <table className="bg-white sm:w-[70%] xs:w-[100%] w-[95%] sm:border-spacing-[20px] border-spacing-[15px] border-separate rounded-[5px] shadow-md">
           <thead>
             <tr>
@@ -56,7 +56,7 @@ function Page() {
                   </h3>
                 </td>
                 <td className="text-3xs font-mb leading-[120%] text-text-500">
-                  $ {Number(curr?.subTotal)}
+                  $ {Number(curr?.subTotal).toFixed(2)}
                 </td>
                 <td className="text-3xs font-mb leading-[120%] text-text-500">
                   {curr?.quantity}
@@ -90,7 +90,7 @@ function Page() {
               </tr>
               <tr>
                 <td>Sub Total</td>
-                <td>${totalPriceFinder(carts)}</td>
+                <td>${totalPriceFinder(carts).toFixed(2)}</td>
               </tr>
               <tr>
                 <td>Delivery Charge</td>
@@ -101,7 +101,7 @@ function Page() {
               </tr>
               <tr>
                 <td>Total</td>
-                <td>${totalPriceFinder(carts) + 50}</td>
+                <td>${(totalPriceFinder(carts) + 50).toFixed(2)}</td>
               </tr>
             </tbody>
           </table>
