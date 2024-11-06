@@ -50,3 +50,17 @@ export const addToCart = async (product: CartProduct) => {
     return response.data;
   }
 };
+
+export const updateCart = async ({
+  itemId,
+  quantity,
+}: {
+  itemId: string;
+  quantity: number;
+}) => {
+  const cartId = Cookies.get("cart-id");
+  const response = await api.put(`/order/update-item/${cartId}/${itemId}`, {
+    quantity: quantity,
+  });
+  return response.data;
+};

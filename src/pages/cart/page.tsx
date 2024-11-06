@@ -1,17 +1,29 @@
-import { useDispatch } from "react-redux";
-// import { removeCartFromStorage } from "../../app/api/cartSlice";
-import { useAppSelector } from "@features/store";
-import { GoTrash } from "react-icons/go";
-// import { removeCart } from "@features/store/reducer/cart-reducer";
-// import totalCartItemFinder from "../../helper/totalCartItemsFinder";
-// import totalPriceFinder from "../../helper/totalPriceFinder";
-import { useNavigate } from "react-router-dom";
+import Button from "@components/button";
+import { updateCart } from "@features/api/services";
 import { CartItem } from "@features/api/services/type";
-import { totalPriceFinder, totalCartItemFinder } from "@utils/index";
+import { useAppSelector } from "@features/store";
+import { useMutation } from "@tanstack/react-query";
+import { totalCartItemFinder, totalPriceFinder } from "@utils/index";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { queryClient } from "../../main";
 
 function Page() {
   const { carts } = useAppSelector((state) => state.Cart);
-  const dispatch = useDispatch();
+  const { mutateAsync: update, isPending } = useMutation({
+    mutationKey: ["update-cart"],
+    mutationFn: ({ itemId, quantity }: { itemId: string; quantity: number }) =>
+      updateCart({
+        itemId,
+        quantity,
+      }),
+    onSuccess() {
+      toast.success("Cart Updated");
+      queryClient.refetchQueries({
+        queryKey: ["cart"],
+      });
+    },
+  });
   const navigate = useNavigate();
 
   return (
@@ -59,17 +71,34 @@ function Page() {
                   $ {Number(curr?.subTotal).toFixed(2)}
                 </td>
                 <td className="text-3xs font-mb leading-[120%] text-text-500">
-                  {curr?.quantity}
-                </td>
-                <td>
-                  <button
-                    onClick={() => {
-                      //   dispatch(removeCart(curr!));
-                      //   removeCartFromStorage(curr!);
-                    }}
-                  >
-                    <GoTrash className="text-sm font-mb leading-[120%] text-text-500" />
-                  </button>
+                  <div className="flex gap-3 items-center">
+                    <Button
+                      isLoading={isPending}
+                      className="text-xs px-0 w-[30px]"
+                      onClick={async () => {
+                        await update({
+                          itemId: curr?._id!,
+                          quantity: curr?.quantity! - 1,
+                        });
+                      }}
+                      disabled={curr?.quantity == 0}
+                      text="-"
+                    />
+                    <h2 className="font-semibold sm:text-2xs text-3xs">
+                      {curr?.quantity}
+                    </h2>
+                    <Button
+                      isLoading={isPending}
+                      className="text-xs px-0 w-[30px]"
+                      onClick={async () => {
+                        await update({
+                          itemId: curr?._id!,
+                          quantity: curr?.quantity! + 1,
+                        });
+                      }}
+                      text="+"
+                    />
+                  </div>
                 </td>
               </tr>
             ))}
@@ -94,14 +123,14 @@ function Page() {
               </tr>
               <tr>
                 <td>Delivery Charge</td>
-                <td>$50</td>
+                <td>$10</td>
               </tr>
               <tr>
                 <td className="w-[100%] h-[1px] bg-text-200 opacity-1"></td>
               </tr>
               <tr>
                 <td>Total</td>
-                <td>${(totalPriceFinder(carts) + 50).toFixed(2)}</td>
+                <td>${(totalPriceFinder(carts) + 10).toFixed(2)}</td>
               </tr>
             </tbody>
           </table>

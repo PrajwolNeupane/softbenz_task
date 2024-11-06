@@ -8,10 +8,11 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 import { queryClient } from "../../../main";
+import Error from "./error";
 
 const Page = () => {
   const { slug } = useParams();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["product", slug],
     queryFn: () => getProduct(slug as string),
   });
@@ -36,6 +37,11 @@ const Page = () => {
       </div>
     );
   }
+
+  if (isError) {
+    return <Error />;
+  }
+
   return (
     <div className="flex flex-col w-[100%] min-h-[88vh] justify-start md:gap-5  xs:gap-4 gap-3 md:px-[5%] px-[3%] sm:py-[30px] py-[15px]">
       <div className="flex flex-col bg-white w-[100%] px-[10%] py-5 gap-[10px] shadow-md rounded-[5px]">
